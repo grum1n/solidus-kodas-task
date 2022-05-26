@@ -1,5 +1,7 @@
 export const ROUTES = {
-    PUBLIC_LOGIN: '/',
-    PUBLIC_REGISTER: '/register',
-    AUTORIZED_USERS_LIST: '/users-list',
+    PUBLIC_DEFAULT: '/',
+    PUBLIC_LOGIN: '/public/login',
+    PUBLIC_REGISTER: '/public/register',
+
+    AUTORIZED_USERS_DASHBOARD: '/autorized/dashboard',
 }
