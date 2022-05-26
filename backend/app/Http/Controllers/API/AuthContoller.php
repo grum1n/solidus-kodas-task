@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthContoller extends Controller
 {
+   
+    public function userslist()
+    {
+        $users = User::all();
+        return response()->json([
+            'status' => 200,
+            'userslist' => $users
+        ]);
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

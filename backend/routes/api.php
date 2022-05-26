@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AuthContoller;
 
 Route::post('register', [AuthContoller::class, 'register']);
 Route::post('login', [AuthContoller::class, 'login']);
+Route::get('/users', [AuthContoller::class, 'userslist']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/checkingAuthenticated', function () {

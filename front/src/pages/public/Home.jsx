@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Img from '../../images/loginandregister.jpg';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Home() {
+    const [usersList, setStudentsList] = useState({
+        users: [],
+        loading:true,
+    });
+
+
+    useEffect(() => {
+      const fetchData = async () => {
+          const res = await axios.get('http://localhost:8000/api/users');
+          if(res.data.status === 200){
+                setStudentsList({
+                    users: res.data.userslist,
+                    loading: false,
+                });
+          }
+      }
+      fetchData();
+    }, [])
+
+    console.log('users :', usersList.users)
+    
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
             <div className='hidden sm:block'>
@@ -15,12 +37,17 @@ function Home() {
                         <Link to='/public/register' className='hover:text-cyan-600'>Create an account</Link>
                     </div>
                     <h2 className='text-4xl font-bold text-center py-6'>Users List</h2>
-                    <div className='flex flex-col py-2 border p-2 m-1'>
-                        user a
-                    </div>
-                    <div className='flex flex-col py-2 border p-2 m-1'>
-                        user b
-                    </div>
+                        {
+                            usersList.users.map((user) => {
+                                return (
+                                    <div key={user.id} className='text-center flex flex-col py-2 border p-2 m-1'>
+                                     User: {user.name}
+                                     <br /> 
+                                     Email: {user.email}
+                                    </div>
+                                )
+                            }) 
+                        }
                 </div>
             </div>
         </div>
